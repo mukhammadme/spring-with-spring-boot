@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GuestService {
@@ -32,5 +33,16 @@ public class GuestService {
         });
 
         return guestList;
+    }
+
+    public Guest addGuest(Guest guest) {
+        if (guest == null) {
+            throw new RuntimeException("Guest cannot be null");
+        }
+        return this.guestRepository.save(guest);
+    }
+
+    public Optional<Guest> getGuestById(long guestId) {
+        return this.guestRepository.findById(guestId);
     }
 }
